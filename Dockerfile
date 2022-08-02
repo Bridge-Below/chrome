@@ -49,6 +49,9 @@ RUN if [ "$USE_CHROME_STABLE" = "true" ]; then \
   npm prune --production &&\
   chown -R blessuser:blessuser $APP_DIR
 
+RUN curl "https://docs.zyte.com/_static/zyte-smartproxy-ca.crt" --output zyte-smartproxy-ca.crt
+RUN cp zyte-smartproxy-ca.crt /usr/local/share/ca-certificates/zyte-smartproxy-ca.crt && update-ca-certificates
+
 # Run everything after as non-privileged user.
 USER blessuser
 
